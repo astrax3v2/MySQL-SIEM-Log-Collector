@@ -1,0 +1,30 @@
+<group name="mysql,database,">
+  <rule id="100500" level="3">
+    <decoded_as>mysql-general</decoded_as>
+    <description>MySQL event detected</description>
+  </rule>
+
+  <rule id="100501" level="10">
+    <if_sid>100500</if_sid>
+    <match>DROP TABLE|DROP DATABASE|TRUNCATE TABLE</match>
+    <description>MySQL destructive database command detected</description>
+  </rule>
+
+  <rule id="100502" level="8">
+    <if_sid>100500</if_sid>
+    <match>CREATE USER|DROP USER|ALTER USER|GRANT |REVOKE </match>
+    <description>MySQL user or privilege management command detected</description>
+  </rule>
+
+  <rule id="100503" level="9">
+    <if_sid>100500</if_sid>
+    <match>INTO OUTFILE|INTO DUMPFILE|LOAD_FILE\(</match>
+    <description>MySQL possible data export or file access detected</description>
+  </rule>
+
+  <rule id="100504" level="8">
+    <if_sid>100500</if_sid>
+    <match>UNION SELECT|OR 1=1|SLEEP\(|BENCHMARK\(|INFORMATION_SCHEMA</match>
+    <description>MySQL suspicious SQL injection pattern detected</description>
+  </rule>
+</group>

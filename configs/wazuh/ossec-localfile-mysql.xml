@@ -1,0 +1,20 @@
+<!-- Add inside <ossec_config> in /var/ossec/etc/ossec.conf -->
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/mysql/mysql.log</location>
+</localfile>
+
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/mysql/error.log</location>
+</localfile>
+
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/mysql/mysql-slow.log</location>
+</localfile>
+
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/mysql/audit.log</location>
+</localfile>

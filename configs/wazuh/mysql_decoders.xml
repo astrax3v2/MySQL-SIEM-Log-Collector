@@ -1,0 +1,15 @@
+<decoder name="mysql-general">
+  <prematch>mysql-general| Query | Connect | Quit</prematch>
+</decoder>
+
+<decoder name="mysql-general-query">
+  <parent>mysql-general</parent>
+  <regex>^(\S+)\s+(\d+)\s+Query\s+(.+)$</regex>
+  <order>event_time, mysql_thread_id, mysql_query</order>
+</decoder>
+
+<decoder name="mysql-general-connect">
+  <parent>mysql-general</parent>
+  <regex>^(\S+)\s+(\d+)\s+Connect\s+([^@]+)@([^\s]+)\s+on\s*([^\s]*)</regex>
+  <order>event_time, mysql_thread_id, db_user, src, database_name</order>
+</decoder>
