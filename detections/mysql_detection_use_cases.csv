@@ -1,0 +1,20 @@
+Rule Name,Condition,Severity,Description
+MySQL - Root Login from Remote Host,"db_action=Connect AND db_user=root AND src_ip NOT IN localhost",High,Detects remote root login to MySQL
+MySQL - Failed Login Attempt,"message contains Access denied",Medium,Detects failed authentication attempt
+MySQL - Multiple Failed Login Attempts,"count failed login > 5 in 5 minutes by same src_ip or user",High,Detects brute-force attempt
+MySQL - Database User Created,"query contains CREATE USER",High,Detects database user creation
+MySQL - Database User Deleted,"query contains DROP USER",High,Detects database user deletion
+MySQL - Privilege Granted,"query contains GRANT",High,Detects privilege assignment
+MySQL - Privilege Revoked,"query contains REVOKE",Medium,Detects privilege removal
+MySQL - Table Dropped,"query contains DROP TABLE",Critical,Detects destructive table operation
+MySQL - Database Dropped,"query contains DROP DATABASE",Critical,Detects destructive database operation
+MySQL - Table Truncated,"query contains TRUNCATE TABLE",Critical,Detects destructive data removal
+MySQL - Delete Query Without WHERE,"query_type=DELETE AND query not contains WHERE",High,Detects bulk deletion risk
+MySQL - Update Query Without WHERE,"query_type=UPDATE AND query not contains WHERE",High,Detects bulk update risk
+MySQL - Data Export Using INTO OUTFILE,"query contains INTO OUTFILE",Critical,Detects data export or file write
+MySQL - Data Export Using INTO DUMPFILE,"query contains INTO DUMPFILE",Critical,Detects dumpfile write activity
+MySQL - SQL Injection Pattern Detected,"query contains UNION SELECT OR OR 1=1 OR SLEEP( OR BENCHMARK(",High,Detects SQL injection-like activity
+MySQL - Sensitive Table Access,"query_type=SELECT AND table_name in sensitive table list",Medium/High,Detects access to sensitive database objects
+MySQL - Configuration Changed Using SET GLOBAL,"query contains SET GLOBAL",High,Detects server configuration change
+MySQL - Plugin Installed,"query contains INSTALL PLUGIN",Critical,Detects potentially dangerous plugin installation
+MySQL - Query Executed Outside Business Hours,"sensitive query outside approved hours",Medium/High,Detects suspicious timing

@@ -1,1 +1,48 @@
-
+title: MySQL Destructive Database Command
+id: 8f4f0c49-95e8-4b99-a7a1-mysql-drop-truncate
+status: experimental
+description: Detects destructive MySQL commands such as DROP DATABASE, DROP TABLE, and TRUNCATE TABLE.
+logsource:
+  product: mysql
+  service: general
+selection:
+  database.query|contains:
+    - 'DROP DATABASE'
+    - 'DROP TABLE'
+    - 'TRUNCATE TABLE'
+condition: selection
+level: critical
+---
+title: MySQL Privilege or User Management Command
+id: 67e54089-bae2-42d0-bb91-mysql-priv-user
+status: experimental
+description: Detects MySQL user and privilege management commands.
+logsource:
+  product: mysql
+  service: general
+selection:
+  database.query|contains:
+    - 'CREATE USER'
+    - 'DROP USER'
+    - 'ALTER USER'
+    - 'GRANT '
+    - 'REVOKE '
+condition: selection
+level: high
+---
+title: MySQL Possible SQL Injection Pattern
+id: 1f3f9bc2-c52d-49dd-b463-mysql-sqli-pattern
+status: experimental
+description: Detects SQL injection-like patterns inside MySQL queries.
+logsource:
+  product: mysql
+  service: general
+selection:
+  database.query|contains:
+    - 'UNION SELECT'
+    - 'OR 1=1'
+    - 'SLEEP('
+    - 'BENCHMARK('
+    - 'INFORMATION_SCHEMA'
+condition: selection
+level: high
