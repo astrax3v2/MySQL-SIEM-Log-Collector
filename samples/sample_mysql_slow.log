@@ -1,0 +1,5 @@
+# Time: 2026-07-01T10:20:00.000000Z
+# User@Host: report_user[report_user] @ 192.168.1.70 []  Id: 45
+# Query_time: 12.345678  Lock_time: 0.000123 Rows_sent: 100000 Rows_examined: 1000000
+SET timestamp=1782901200;
+SELECT * FROM transactions;
