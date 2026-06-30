@@ -1,1 +1,43 @@
+- type: filestream
+  id: mysql-general-log
+  enabled: true
+  paths:
+    - /var/log/mysql/mysql.log
+  fields:
+    log_type: mysql_general
+    database_engine: mysql
+    event_dataset: mysql.general
+  fields_under_root: true
 
+- type: filestream
+  id: mysql-error-log
+  enabled: true
+  paths:
+    - /var/log/mysql/error.log
+  fields:
+    log_type: mysql_error
+    database_engine: mysql
+    event_dataset: mysql.error
+  fields_under_root: true
+
+- type: filestream
+  id: mysql-slow-log
+  enabled: true
+  paths:
+    - /var/log/mysql/mysql-slow.log
+  fields:
+    log_type: mysql_slow
+    database_engine: mysql
+    event_dataset: mysql.slow
+  fields_under_root: true
+
+- type: filestream
+  id: mysql-audit-log
+  enabled: true
+  paths:
+    - /var/log/mysql/audit.log
+  fields:
+    log_type: mysql_audit
+    database_engine: mysql
+    event_dataset: mysql.audit
+  fields_under_root: true
