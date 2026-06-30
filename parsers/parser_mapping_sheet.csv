@@ -1,0 +1,19 @@
+Raw Log Component,Parsed Field,Normalized Field,Data Type,Example Value,Extraction Logic / Regex,Security Usage
+Timestamp,event_time,@timestamp,datetime,2026-07-01T10:15:25.567890Z,^\d{4}-\d{2}-\d{2}T[\d:.]+Z,Event timeline
+Hostname,db_host,host.name,string,mysql-db-01,Agent metadata,Asset identification
+Log file path,log_path,log.file.path,string,/var/log/mysql/mysql.log,Collector metadata,Source validation
+Log type,log_type,event.dataset,string,mysql_general,Static forwarder field,Parser routing
+Thread ID,db_thread_id,mysql.thread_id,number,12,\s(?<db_thread_id>\d+)\s,Session correlation
+MySQL action,db_action,event.action,string,Query,(?<db_action>Connect|Query|Quit|Init DB|Prepare|Execute),Event classification
+Database user,db_user,user.name,string,root,Connect\s+(?<db_user>[^@]+)@,User monitoring
+Source IP,src_ip,source.ip,ip,192.168.1.50,@(?<src_ip>[0-9.]+),Source tracking
+Source host,src_host,source.domain,string,app-server-01,@(?<src_host>[^\s]+),Host tracking
+Database name,database_name,database.name,string,finance_db,\son\s+(?<database_name>\S+),Database context
+SQL query,sql_query,database.query,string,SELECT * FROM users;,Query\s+(?<sql_query>.*)$,Investigation
+Query type,query_type,database.operation,string,SELECT,(?i)^\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TRUNCATE|GRANT|REVOKE|SET|SHOW|USE|CALL|LOAD|REPLACE)\b,Rule classification
+Table name,table_name,database.table,string,users,(?i)(?:FROM|INTO|UPDATE|TABLE|DATABASE)\s+`?(?<table_name>[a-zA-Z0-9_.$-]+)`?,Object monitoring
+Event category,event_category,event.category,string,database,Static mapping,Normalization
+Event type,event_type,event.type,string,access,Based on query type,Correlation
+Severity,severity,event.severity,string,high,Based on rule logic,Alerting
+Rule name,rule_name,rule.name,string,MySQL Drop Table Detected,Detection rule,SOC alerting
+Raw message,raw_log,event.original,string,Full raw log line,Full raw event,Forensic evidence
