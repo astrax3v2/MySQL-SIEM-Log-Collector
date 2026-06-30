@@ -1,0 +1,11 @@
+SELECT NOW();
+CREATE DATABASE IF NOT EXISTS siem_test;
+CREATE TABLE IF NOT EXISTS siem_test.test_table(id INT, name VARCHAR(50));
+INSERT INTO siem_test.test_table VALUES(1, 'test');
+UPDATE siem_test.test_table SET name='updated' WHERE id=1;
+DELETE FROM siem_test.test_table WHERE id=1;
+CREATE USER IF NOT EXISTS 'siem_test_user'@'localhost' IDENTIFIED BY 'ChangeMe_12345!';
+GRANT SELECT ON siem_test.* TO 'siem_test_user'@'localhost';
+REVOKE SELECT ON siem_test.* FROM 'siem_test_user'@'localhost';
+DROP USER IF EXISTS 'siem_test_user'@'localhost';
+DROP DATABASE siem_test;
